@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stash — Build a Plugin</title>
+  <meta name="description" content="How to add a custom stash type to Stash — a JSON file, no code, no rebuild." />
+  <meta name="theme-color" content="#0d1117" />
+  <link rel="icon" href="../assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    .doc h1 { font-size: 1.9rem; }
+    .doc pre.code-block { white-space: pre; overflow-x: auto; line-height: 1.6; }
+    .doc .manifest-row .name { white-space: nowrap; }
+    .doc table.icons {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      margin: 14px 0 0;
+    }
+    .doc table.icons td {
+      padding: 6px 10px 6px 0;
+      color: var(--secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 16px 0;
+      font-size: 0.92rem;
+      color: var(--secondary);
+    }
+    .callout strong { color: var(--primary); }
+  </style>
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap site-nav">
+      <a class="wordmark" href="/">
+        <img src="../assets/icon.png" alt="" />
+        Stash
+      </a>
+      <nav>
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#features">Features</a>
+        <a href="/#trust">Privacy</a>
+        <a href="/#download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap doc">
+    <h1>Build a plugin</h1>
+    <p class="updated">A plugin is one JSON file. No code, no build step, no source access needed.</p>
+
+    <p>A "plugin" in Stash is what shows up as a type when you create a stash — an icon, a label, a one-line description, a set of default ignore patterns, and (optionally) a list of paths Stash offers to add automatically if they exist. The five built-in types (Code Project, Game Saves, Config/Dotfiles, Claude Config, Custom) are themselves ordinary plugin files — nothing about them is special-cased in the app.</p>
+
+    <h2>Where it goes</h2>
+    <p>Drop a <code>.json</code> file into Stash's plugin folder:</p>
+    <table class="icons" style="margin-top:6px">
+      <tr><td style="width:110px">macOS</td><td><code>~/Library/Application Support/stash/plugins</code></td></tr>
+      <tr><td>Windows</td><td><code>%APPDATA%\stash\plugins</code></td></tr>
+      <tr><td>Linux</td><td><code>~/.config/stash/plugins</code></td></tr>
+    </table>
+    <p style="margin-top:14px">The folder is created automatically the first time Stash runs, seeded with the five defaults. Restart Stash after adding or editing a file — plugins load once at startup, there's no live-reload.</p>
+
+    <h2>The filename is the id</h2>
+    <p>There's no <code>id</code> field to fill in. A file named <code>unity-project.json</code> becomes the type with id <code>unity-project</code> — that's also the value stored on any stash you create with it, so don't rename the file once you're using it (nothing breaks if you do; existing stashes just fall back to the Custom type).</p>
+
+    <h2>Schema</h2>
+    <div class="manifest" style="margin-top:10px">
+      <div class="manifest-row">
+        <div class="name">label</div>
+        <div class="desc">string, required. Shown in the type picker and on the stash's detail panel.</div>
+      </div>
+      <div class="manifest-row">
+        <div class="name">icon</div>
+        <div class="desc">string, required. One of the names in the table below — anything else falls back to a generic box icon.</div>
+      </div>
+      <div class="manifest-row">
+        <div class="name">description</div>
+        <div class="desc">string, required. One line, shown under the label in the type picker.</div>
+      </div>
+      <div class="manifest-row">
+        <div class="name">defaultIgnores</div>
+        <div class="desc">string[], required (can be empty). Pre-fills the ignore list when this type is picked — see matching rules below.</div>
+      </div>
+      <div class="manifest-row">
+        <div class="name">suggestedPaths</div>
+        <div class="desc">string[], optional. Path templates Stash checks for and offers to add automatically — see placeholders below.</div>
+      </div>
+    </div>
+
+    <h2>Icon names</h2>
+    <table class="icons">
+      <tr><td>Code2</td><td>Gamepad2</td><td>Settings2</td><td>Bot</td><td>Package</td></tr>
+      <tr><td>Folder</td><td>FolderOpen</td><td>HardDrive</td><td>Database</td><td>FileText</td></tr>
+      <tr><td>Terminal</td><td>Globe</td><td>Palette</td><td>Music</td><td>Image</td></tr>
+      <tr><td>Video</td><td>Archive</td><td>Wrench</td><td>Cloud</td><td>Box</td></tr>
+    </table>
+
+    <h2>Ignore pattern matching</h2>
+    <p>Each entry in <code>defaultIgnores</code> matches by bare file/folder name, at any depth inside the paths you back up — not the full path. A pattern starting with <code>*</code> matches by suffix; anything else has to match the name exactly.</p>
+    <div class="callout"><strong>node_modules</strong> matches a folder named exactly <code>node_modules</code>, anywhere inside what you're backing up. <strong>*.pyc</strong> matches any file ending in <code>.pyc</code>. There's no <code>**</code> or mid-string wildcard support.</div>
+
+    <h2>Suggested paths</h2>
+    <p>Optional. Each entry is a template string — Stash checks whether it exists on disk and, if so, offers it as a starting point when you pick this type. Three placeholders are available:</p>
+    <div class="manifest" style="margin-top:10px">
+      <div class="manifest-row">
+        <div class="name">{homeDir}</div>
+        <div class="desc">The current user's home directory.</div>
+      </div>
+      <div class="manifest-row">
+        <div class="name">{sep}</div>
+        <div class="desc">The platform path separator (<code>/</code> or <code>\</code>) — use it instead of hardcoding either.</div>
+      </div>
+      <div class="manifest-row">
+        <div class="name">{rootFolder}</div>
+        <div class="desc">Defaults to <code>.claude</code>. Only meaningful if your plugin's id is <code>claude-config</code>, which gets a root-folder text field in the UI — every other plugin can ignore this placeholder.</div>
+      </div>
+    </div>
+
+    <h2>Example</h2>
+    <p>A plugin for Unity projects, saved as <code>unity-project.json</code>:</p>
+    <pre class="code-block">{
+  "label": "Unity Project",
+  "icon": "Gamepad2",
+  "description": "Unity project folder. Skips build artifacts automatically.",
+  "defaultIgnores": ["Library", "Temp", "Obj", "Build", "Logs", "*.csproj"],
+  "suggestedPaths": []
+}</pre>
+
+    <h2>Sharing a plugin</h2>
+    <p>It's a text file — paste it in a gist, a message, a repo. Anyone who wants it copies it into their own plugin folder and restarts Stash. There's no registry or install command; that's deliberately out of scope for now.</p>
+
+    <div class="callout">Plugin files are pure data — no code ever runs from them. That's not a limitation we're planning to lift: it's why a plugin someone else wrote is safe to drop into your own Stash without a second thought.</div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <span>© <span id="year"></span> Daniel Tostes</span>
+      <nav>
+        <a href="/">Home</a>
+        <a href="https://github.com/danieltvaz/stash-releases/releases">All releases</a>
+        <a href="mailto:danieltostes@live.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
