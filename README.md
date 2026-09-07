@@ -6,4 +6,4 @@ Source code is developed in a private repository and isn't published here — th
 
 - Download: https://stash.danieltostes.dev
 - Privacy policy: https://stash.danieltostes.dev/privacy/
-- Contact: alucardvaz@gmail.com
+- Contact: danieltostes@live.com
