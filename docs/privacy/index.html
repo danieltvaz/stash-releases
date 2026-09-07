@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stash — Privacy Policy</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0d1117" />
+  <link rel="icon" href="../assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap site-nav">
+      <a class="wordmark" href="/">
+        <img src="../assets/icon.png" alt="" />
+        Stash
+      </a>
+      <nav>
+        <a href="/">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap doc">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated September 7, 2026</p>
+
+    <p>Stash is a desktop app. This policy covers the whole product, because there isn't a separate service to describe: no Stash server exists, and nothing about your files or your account passes through one.</p>
+
+    <h2>What Stash does with your files</h2>
+    <p>Stash reads the folders and files you configure inside the app, zips them, and writes that zip directly to a destination you choose — your own Google Drive account, or a disk you point it at. That upload goes straight from your machine to Google's servers (for Drive) or to the disk (for local backups). We never see it, store it, or have a copy of it anywhere.</p>
+
+    <h2>What Stash asks Google for</h2>
+    <p>When you connect Google Drive, Stash requests one OAuth scope: <code>https://www.googleapis.com/auth/drive.file</code>. This scope only grants access to files and folders that Stash itself creates in your Drive — it cannot see, list, or read anything else already in your account.</p>
+    <p>The access and refresh tokens Google issues are encrypted on disk using your operating system's built-in secure storage (Keychain on macOS, DPAPI on Windows, libsecret on Linux) and stay on your machine. They are never transmitted anywhere except directly to Google's own OAuth endpoints, and only to authenticate your own Drive requests.</p>
+
+    <h2>What we collect</h2>
+    <p>Nothing. Stash has no backend, no analytics, and no telemetry. We don't know how many people use it, what you back up, or when you run it. The only information exchanged over the network is between your machine and the destination you configured yourself (Google's API, or a disk).</p>
+
+    <h2>Local disk backups</h2>
+    <p>If you choose a local disk as your destination, no network request happens at all for that stash — files are copied on your machine or over your own local network, using the operating system's file APIs.</p>
+
+    <h2>Revoking access</h2>
+    <p>You can disconnect Stash from Google Drive at any time from inside the app (Settings → Google Drive → Disconnect), or by removing Stash's access from your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions page</a>. Either action deletes the locally stored tokens; it does not delete files already written to your Drive.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If this policy changes, the date at the top of this page will change with it. Material changes will be noted in the release notes of the next version.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy: <a href="mailto:alucardvaz@gmail.com">alucardvaz@gmail.com</a>.</p>
+  </main>
+
+  <footer class="site">
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <span>© <span id="year"></span> Daniel Tostes</span>
+      <nav>
+        <a href="/">Stash</a>
+        <a href="https://github.com/danieltvaz/stash-releases/releases">All releases</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

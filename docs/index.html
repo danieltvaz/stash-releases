@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stash — back up what you'd hate to lose</title>
+  <meta name="description" content="Stash backs up the folders you actually care about — dotfiles, scripts, savegames — to your own Google Drive or a local disk, on a schedule. No server, no subscription." />
+  <meta property="og:title" content="Stash" />
+  <meta property="og:description" content="Back up dotfiles, scripts and savegames to your own Google Drive or a local disk. No server in between." />
+  <meta property="og:image" content="https://stash.danieltostes.dev/assets/icon.png" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0d1117" />
+  <link rel="icon" href="assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <header class="site">
+    <div class="wrap site-nav">
+      <a class="wordmark" href="/">
+        <img src="assets/icon.png" alt="" />
+        Stash
+      </a>
+      <nav>
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#trust">Privacy</a>
+        <a href="#download">Download</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap hero">
+      <div>
+        <h1>Back up what you'd hate to lose.</h1>
+        <p class="lede">Stash zips up the folders you actually care about — dotfiles, scripts, savegames — and pushes them to your own Google Drive or a local disk, on a schedule. No account but your own, no server in between.</p>
+        <div class="hero-actions">
+          <a id="primary-download" class="btn btn-primary" href="#download">Download for your platform</a>
+          <a class="btn btn-secondary" href="#download">See all downloads</a>
+        </div>
+        <p class="platform-note" id="platform-note" hidden></p>
+      </div>
+
+      <div class="terminal" role="img" aria-label="Terminal showing a Stash backup: three files uploaded to Google Drive, 41 kilobytes, backed up just now.">
+        <div class="terminal-bar"><span></span><span></span><span></span></div>
+        <div class="terminal-body" id="terminal-body">
+          <div class="terminal-line cmd" style="animation-delay:0.05s">$ stash backup dotfiles</div>
+          <div class="terminal-line done" style="animation-delay:0.35s"><span class="path">~/.zshrc</span><span class="status">done</span></div>
+          <div class="terminal-line done" style="animation-delay:0.65s"><span class="path">~/.config/nvim/</span><span class="status">done</span></div>
+          <div class="terminal-line done" style="animation-delay:0.95s"><span class="path">~/scripts/deploy.sh</span><span class="status">done</span></div>
+          <div class="terminal-line summary" style="animation-delay:1.3s">3 files → Google Drive · 41 KB · backed up just now</div>
+        </div>
+      </div>
+    </div>
+
+    <section id="how-it-works">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <p class="section-lede">Four decisions, then Stash stays out of your way.</p>
+        <div class="steps">
+          <div class="step">
+            <span class="num">01</span>
+            <div>
+              <h3>Pick what matters</h3>
+              <p>Point Stash at the folders and files you don't want to lose.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="num">02</span>
+            <div>
+              <h3>Choose where it lives</h3>
+              <p>Your own Google Drive account, or a disk you already have.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="num">03</span>
+            <div>
+              <h3>Set how often</h3>
+              <p>Every hour, once a day, or off — you trigger it by hand instead.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="num">04</span>
+            <div>
+              <h3>Stash keeps it current</h3>
+              <p>Quiet backups in the background. Restore from any machine when you need to.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <h2>What's in the app</h2>
+        <p class="section-lede">One backup app, not a suite. Here's what it actually does.</p>
+        <div class="manifest">
+          <div class="manifest-row">
+            <div class="name">scheduled-backups</div>
+            <div class="desc">Each stash runs on its own interval, or you disable scheduling and run it by hand.</div>
+          </div>
+          <div class="manifest-row">
+            <div class="name">drive-or-local-disk</div>
+            <div class="desc">Same app, two destinations — connect your own Google Drive, or point at a mounted disk.</div>
+          </div>
+          <div class="manifest-row">
+            <div class="name">shared-stashes</div>
+            <div class="desc">Back up the same stash from more than one machine. Stash tracks which one is allowed to write.</div>
+          </div>
+          <div class="manifest-row">
+            <div class="name">restore-anywhere</div>
+            <div class="desc">Pull down a version from any machine that's backed up to the same stash.</div>
+          </div>
+          <div class="manifest-row">
+            <div class="name">one-queue</div>
+            <div class="desc">Every backup, restore, and move runs through a single queue you can see and cancel.</div>
+          </div>
+          <div class="manifest-row">
+            <div class="name">no-server</div>
+            <div class="desc">Stash talks straight to your own storage. There's no Stash server to trust — because there isn't one.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trust">
+      <div class="wrap">
+        <h2>Where your data actually goes</h2>
+        <p class="section-lede">Worth being specific about, since it's asking for Drive access.</p>
+        <div class="trust-grid">
+          <div>
+            <h3>No server in the middle</h3>
+            <p>Stash is a desktop app. It reads the files you point it at and writes them straight to your own Google Drive account or your own disk — nothing passes through a server Stash operates, because none exists. Your Google tokens are encrypted on disk and never leave your machine.</p>
+            <p>The Drive permission Stash asks for is <code>drive.file</code> — access only to files Stash itself creates. It can't see, read, or touch anything else in your Drive. Full detail in the <a href="privacy/">privacy policy</a>.</p>
+          </div>
+          <div>
+            <h3>About that security warning</h3>
+            <p>Stash isn't code-signed yet, so your OS will flag the installer on first run. That's Gatekeeper or SmartScreen being cautious about an unsigned app, not a virus scanner catching something.</p>
+            <p><strong>macOS</strong> — if it says the app "is damaged and can't be opened," run this in Terminal after moving it to Applications:</p>
+            <code class="code-block">xattr -cr /Applications/Stash.app</code>
+            <p style="margin-top:14px"><strong>Windows</strong> — click "More info," then "Run anyway" on the SmartScreen prompt.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="wrap">
+        <h2>Download</h2>
+        <p class="section-lede">Binaries are built and published straight from source on every release — see them on <a href="https://github.com/danieltvaz/stash-releases/releases" id="releases-link" style="color:var(--secondary);text-decoration:underline">GitHub Releases</a>.</p>
+
+        <div class="download-grid" id="download-grid">
+          <div class="download-card" id="card-mac">
+            <h3>macOS</h3>
+            <p class="sub">.dmg — Apple Silicon and Intel</p>
+            <a class="btn btn-secondary btn-small" aria-disabled="true" href="#">Checking latest release…</a>
+          </div>
+          <div class="download-card" id="card-win">
+            <h3>Windows</h3>
+            <p class="sub">.exe installer — x64</p>
+            <a class="btn btn-secondary btn-small" aria-disabled="true" href="#">Checking latest release…</a>
+          </div>
+          <div class="download-card" id="card-linux">
+            <h3>Linux</h3>
+            <p class="sub">.AppImage — x64</p>
+            <a class="btn btn-secondary btn-small" aria-disabled="true" href="#">Checking latest release…</a>
+          </div>
+        </div>
+
+        <p class="release-meta" id="release-meta">Looking up the latest release…</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <span>© <span id="year"></span> Daniel Tostes</span>
+      <nav>
+        <a href="privacy/">Privacy</a>
+        <a href="https://github.com/danieltvaz/stash-releases/releases">All releases</a>
+        <a href="mailto:alucardvaz@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    var REPO = 'danieltvaz/stash-releases';
+
+    function platform() {
+      var ua = navigator.userAgent;
+      if (/Mac/i.test(ua)) return 'mac';
+      if (/Win/i.test(ua)) return 'win';
+      if (/Linux/i.test(ua)) return 'linux';
+      return null;
+    }
+
+    function setCardLink(cardId, href, label) {
+      var card = document.getElementById(cardId);
+      var link = card.querySelector('a');
+      if (href) {
+        link.href = href;
+        link.textContent = label;
+        link.removeAttribute('aria-disabled');
+      } else {
+        link.textContent = 'Not available in this release';
+      }
+    }
+
+    fetch('https://api.github.com/repos/' + REPO + '/releases/latest')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        var assets = data.assets || [];
+        var byExt = function (ext) {
+          return assets.filter(function (a) { return a.name.toLowerCase().endsWith(ext); });
+        };
+
+        var dmgs = byExt('.dmg');
+        var exe = byExt('.exe')[0];
+        var appImage = byExt('.appimage')[0];
+
+        var dmgArm = dmgs.find(function (a) { return /arm64/i.test(a.name); });
+        var dmgIntel = dmgs.find(function (a) { return !/arm64/i.test(a.name); }) || dmgs[1];
+
+        var macCard = document.getElementById('card-mac');
+        if (dmgArm || dmgIntel) {
+          var wrap = document.createElement('div');
+          wrap.className = 'arch-links';
+          if (dmgArm) {
+            var a1 = document.createElement('a');
+            a1.className = 'btn btn-secondary btn-small';
+            a1.href = dmgArm.browser_download_url;
+            a1.textContent = 'Apple Silicon';
+            wrap.appendChild(a1);
+          }
+          if (dmgIntel) {
+            var a2 = document.createElement('a');
+            a2.className = 'btn btn-secondary btn-small';
+            a2.href = dmgIntel.browser_download_url;
+            a2.textContent = 'Intel';
+            wrap.appendChild(a2);
+          }
+          macCard.querySelector('a').remove();
+          macCard.appendChild(wrap);
+        } else {
+          setCardLink('card-mac', null);
+        }
+
+        setCardLink('card-win', exe ? exe.browser_download_url : null, 'Download .exe');
+        setCardLink('card-linux', appImage ? appImage.browser_download_url : null, 'Download .AppImage');
+
+        document.getElementById('release-meta').innerHTML =
+          data.tag_name + ' · <a href="' + data.html_url + '">release notes</a>';
+
+        var plat = platform();
+        var primary = document.getElementById('primary-download');
+        var note = document.getElementById('platform-note');
+        if (plat === 'mac' && (dmgArm || dmgIntel)) {
+          primary.href = (dmgArm || dmgIntel).browser_download_url;
+          note.hidden = false;
+          note.textContent = 'Detected macOS — grabbing the ' + (dmgArm ? 'Apple Silicon' : 'Intel') + ' build. Windows or Linux? See all downloads below.';
+        } else if (plat === 'win' && exe) {
+          primary.href = exe.browser_download_url;
+          note.hidden = false;
+          note.textContent = 'Detected Windows. Mac or Linux? See all downloads below.';
+        } else if (plat === 'linux' && appImage) {
+          primary.href = appImage.browser_download_url;
+          note.hidden = false;
+          note.textContent = 'Detected Linux. Mac or Windows? See all downloads below.';
+        }
+      })
+      .catch(function () {
+        document.getElementById('release-meta').innerHTML =
+          'Could not reach GitHub just now — <a href="https://github.com/' + REPO + '/releases">see releases directly</a>.';
+        ['card-mac', 'card-win', 'card-linux'].forEach(function (id) {
+          var link = document.getElementById(id).querySelector('a');
+          link.href = 'https://github.com/' + REPO + '/releases';
+          link.textContent = 'View on GitHub';
+          link.removeAttribute('aria-disabled');
+        });
+      });
+  </script>
+</body>
+</html>
