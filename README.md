@@ -1,9 +1,5 @@
-# stash-releases
+# Stash
 
-This repo hosts the public download page ([stash.danieltostes.dev](https://stash.danieltostes.dev), served from `docs/` via GitHub Pages) and the release binaries for **Stash**, a personal backup app for macOS, Windows, and Linux.
+Stash backs up the folders you actually care about — dotfiles, scripts, savegames — to your own Google Drive or a local disk, on a schedule. No server, no subscription.
 
-Source code is developed in a private repository and isn't published here — this repo only carries built installers (as [Releases](https://github.com/danieltvaz/stash-releases/releases)) and the static landing page.
-
-- Download: https://stash.danieltostes.dev
-- Privacy policy: https://stash.danieltostes.dev/privacy/
-- Contact: danieltostes@live.com
+Download for macOS, Windows, and Linux: **https://stash.danieltostes.dev**
